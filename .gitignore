@@ -1,6 +1,7 @@
 #1.file
 #1.1
 *.class
+*.log
 
 #1.2Package Files #$
 *.jar
