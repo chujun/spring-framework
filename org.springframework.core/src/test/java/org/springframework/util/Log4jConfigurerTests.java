@@ -16,12 +16,12 @@
 
 package org.springframework.util;
 
-import java.io.FileNotFoundException;
-import java.net.URL;
-
 import junit.framework.TestCase;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import java.io.FileNotFoundException;
+import java.net.URL;
 
 /**
  * @author Alef Arendsen
@@ -47,6 +47,7 @@ public class Log4jConfigurerTests extends TestCase {
 	}
 
 	public void testInitLoggingWithRelativeFilePathAndRefreshInterval() throws FileNotFoundException {
+		//cj mark test fail:java.io.FileNotFoundException: Log4j config file [src/test/resources/org/springframework/util/testlog4j.properties] not found
 		doTestInitLogging("src/test/resources/org/springframework/util/testlog4j.properties", true);
 	}
 

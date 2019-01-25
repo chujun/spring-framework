@@ -16,16 +16,16 @@
 
 package org.springframework.core.annotation;
 
-import static org.junit.Assert.*;
-import static org.springframework.core.annotation.AnnotationUtils.*;
+import org.junit.Test;
+import org.springframework.core.Ordered;
 
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Method;
 
-import org.junit.Test;
-import org.springframework.core.Ordered;
+import static org.junit.Assert.*;
+import static org.springframework.core.annotation.AnnotationUtils.*;
 
 /**
  * @author Rod Johnson
@@ -77,6 +77,7 @@ public class AnnotationUtilsTests {
 		assertNull(m.getAnnotation(Order.class));
 		assertNull(getAnnotation(m, Order.class));
 		assertNotNull(findAnnotation(m, Order.class));
+		//cj mark test fail:AssertionError
 		assertNull(m.getAnnotation(Transactional.class));
 		assertNotNull(getAnnotation(m, Transactional.class));
 		assertNotNull(findAnnotation(m, Transactional.class));
