@@ -1,16 +1,26 @@
 @startuml
 participant FileSystemXmlApplicationContext as main
-participant AbstractRefreshableApplicationContext as abstractRefreshableContext
+participant AbstractRefreshableApplicationContext as AbsRefContext
 main ->main : 初始化开始
 main -> main :setConfigLocations
 activate main
 main -> main: refresh()
 activate main
 main -> main: obtainFreshBeanFactory()
-main -> abstractRefreshableContext: refreshBeanFactory（AbstractApplicationContext父类中定义的抽象方法）
-activate abstractRefreshableContext
-deactivate abstractRefreshableContext
-abstractRefreshableContext -> main:
+activate main
+
+
+main -> AbsRefContext: refreshBeanFactory（AbstractApplicationContext父类中定义的抽象方法）
+activate AbsRefContext
+AbsRefContext->AbsRefContext:createBeanFactory(创建DefaultListableBeanFactory基本ioc容器)
+activate AbsRefContext
+AbsRefContext->AbsRefContext:loadBeanDefinitions(beanFactory)
+deactivate AbsRefContext
+deactivate AbsRefContext
+AbsRefContext -> main:
+
+
+deactivate main
 deactivate main
 deactivate main
 main ->main : 初始化结束
