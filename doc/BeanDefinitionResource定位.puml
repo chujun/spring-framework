@@ -1,13 +1,17 @@
 @startuml
 participant FileSystemXmlApplicationContext as main
-participant AbstractApplicationContext as abstractContext
+participant AbstractRefreshableApplicationContext as abstractRefreshableContext
+main ->main : 初始化开始
+main -> main :setConfigLocations
 activate main
 main -> main: refresh()
 activate main
 main -> main: obtainFreshBeanFactory()
-main -> abstractContext: refreshBeanFactory抽象方法
-abstractContext -> main:
+main -> abstractRefreshableContext: refreshBeanFactory（AbstractApplicationContext父类中定义的抽象方法）
+activate abstractRefreshableContext
+deactivate abstractRefreshableContext
+abstractRefreshableContext -> main:
 deactivate main
-
 deactivate main
+main ->main : 初始化结束
 @enduml
