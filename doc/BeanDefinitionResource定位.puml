@@ -1,7 +1,13 @@
 @startuml
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+participant FileSystemXmlApplicationContext as main
+participant AbstractApplicationContext as abstractContext
+activate main
+main -> main: refresh()
+activate main
+main -> main: obtainFreshBeanFactory()
+main -> abstractContext: refreshBeanFactory抽象方法
+abstractContext -> main:
+deactivate main
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+deactivate main
 @enduml
