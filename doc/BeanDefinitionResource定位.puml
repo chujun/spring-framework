@@ -2,6 +2,7 @@
 participant FileSystemXmlApplicationContext as main
 participant AbstractRefreshableApplicationContext as AbsRefContext
 participant AbstractXmlApplicationContext as absXmlContext
+participant AbstractBeanDefinitionReader as absReader
 main ->main : 初始化开始
 main -> main :setConfigLocations
 activate main
@@ -11,10 +12,16 @@ main -> main: obtainFreshBeanFactory()
 activate main
 
 
-main -> AbsRefContext: refreshBeanFactory（AbstractApplicationContext父类中定义的抽象方法）
+main -> AbsRefContext: refreshBeanFactory(AbstractApplicationContext父类中定义的抽象方法)
 AbsRefContext->AbsRefContext:createBeanFactory(创建DefaultListableBeanFactory基本ioc容器)
 AbsRefContext -> absXmlContext:loadBeanDefinitions
 absXmlContext->absXmlContext:创建xml读取器XmlBeanDefinitionReader
+absXmlContext->absXmlContext:loadBeanDefinitions(beanDefinitionReader)
+activate absXmlContext
+absXmlContext->absReader :loadBeanDefinitions
+absReader -> absReader :loadBeanDefinitions
+absReader->absXmlContext :loadBeanDefinitions
+deactivate absXmlContext
 absXmlContext -> AbsRefContext:loadBeanDefinitions
 AbsRefContext -> main:
 
