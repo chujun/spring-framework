@@ -4,6 +4,7 @@ participant AbstractRefreshableApplicationContext as AbsRefContext
 participant AbstractXmlApplicationContext as absXmlContext
 participant AbstractBeanDefinitionReader as absReader
 participant PathMatchingResourcePatternResolver as pathResourceResolver
+participant DefaultResourceLoader
 main ->main : 初始化开始
 main -> main :setConfigLocations
 activate main
@@ -24,7 +25,11 @@ absXmlContext->absReader :loadBeanDefinitions
 activate absReader
 absReader -> absReader :loadBeanDefinitions(String[] locations)
 absReader -> absReader :loadBeanDefinitions(String location, Set<Resource> actualResources)
-absReader->pathResourceResolver:getResources(String locationPattern)
+absReader->pathResourceResolver:getResources(String locationPattern)(最核心的方法)
+pathResourceResolver->DefaultResourceLoader:getResource(String location)
+DefaultResourceLoader->main:getResourceByPath
+main->DefaultResourceLoader:getResourceByPath end
+DefaultResourceLoader->pathResourceResolver:getResource(String location) end
 pathResourceResolver->absReader:getResources(String locationPattern)
 deactivate absReader
 
