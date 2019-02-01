@@ -16,15 +16,15 @@
 
 package org.springframework.aop.aspectj;
 
-import static org.junit.Assert.assertEquals;
-
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Ramnivas Laddad
@@ -50,6 +50,8 @@ public final class ThisAndTargetSelectionOnlyPointcutsAtAspectJTests {
 
 	@Test
 	public void testThisAsClassDoesNotMatch() {
+		//only select jdk6,can't select jdk8,java langurage level:5:,else tested failed
+		//Caused by: java.lang.IllegalArgumentException: error the @target pointcut expression is only supported at Java 5 compliance level or above
 		testBean.doIt();
 		assertEquals(0, counter.thisAsClassCounter);
 	}
