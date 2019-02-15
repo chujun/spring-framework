@@ -1,0 +1,20 @@
+package org.springframework.transaction;
+
+import org.junit.Test;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
+
+import static org.junit.Assert.assertTrue;
+
+/**
+ * @author jun.chu
+ * @date 2019-02-15 09:48
+ */
+public class FileSystemXmlApplicationContextPropertyTest {
+    @Test
+    public void testXmlFilePropertyParse() {
+        String configLocation = "org.springframework.transaction/src/test/java/org/springframework/transaction/txNamespaceHandlerTests.xml";
+        FileSystemXmlApplicationContext ctx = new FileSystemXmlApplicationContext(configLocation);
+        assertTrue(ctx.containsBean("txAdvice"));
+        ctx.close();
+    }
+}
