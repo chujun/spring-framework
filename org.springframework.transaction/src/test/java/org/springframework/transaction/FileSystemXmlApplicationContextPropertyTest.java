@@ -12,8 +12,16 @@ import static org.junit.Assert.assertTrue;
 public class FileSystemXmlApplicationContextPropertyTest {
     @Test
     public void testXmlFilePropertyParse() {
-        //用于debug xmlFile property属性解析
+        //用于debug xmlFile property 属性解析
 
+        String configLocation = "org.springframework.transaction/src/test/java/org/springframework/transaction/interceptor/transactionalBeanFactory.xml";
+        FileSystemXmlApplicationContext ctx = new FileSystemXmlApplicationContext(configLocation);
+        assertTrue(ctx.containsBean("targetDependency"));
+        ctx.close();
+    }
+
+    @Test
+    public void debugGetBean(){
         String configLocation = "org.springframework.transaction/src/test/java/org/springframework/transaction/interceptor/transactionalBeanFactory.xml";
         FileSystemXmlApplicationContext ctx = new FileSystemXmlApplicationContext(configLocation);
         assertTrue(ctx.containsBean("targetDependency"));
