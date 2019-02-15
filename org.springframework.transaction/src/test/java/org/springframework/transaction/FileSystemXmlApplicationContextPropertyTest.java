@@ -12,6 +12,7 @@ import static org.junit.Assert.assertTrue;
 public class FileSystemXmlApplicationContextPropertyTest {
     @Test
     public void testXmlFilePropertyParse() {
+        //用于debug xmlFile property属性解析
         String configLocation = "org.springframework.transaction/src/test/java/org/springframework/transaction/txNamespaceHandlerTests.xml";
         FileSystemXmlApplicationContext ctx = new FileSystemXmlApplicationContext(configLocation);
         assertTrue(ctx.containsBean("txAdvice"));
