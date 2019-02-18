@@ -182,7 +182,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	private <T> T doGetBean(
 			final String name, final Class<T> requiredType, final Object[] args, boolean typeCheckOnly)
 			throws BeansException {
-
+		//得到bean的规范化名称(别名--->bean的正式名称)
 		final String beanName = transformedBeanName(name);
 		Object bean;
 
@@ -231,6 +231,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			checkMergedBeanDefinition(mbd, beanName, args);
 
 			// Guarantee initialization of beans that the current bean depends on.
+			//递归获取bean的依赖bean
 			String[] dependsOn = mbd.getDependsOn();
 			if (dependsOn != null) {
 				for (String dependsOnBean : dependsOn) {
