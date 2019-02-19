@@ -186,7 +186,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 		final String beanName = transformedBeanName(name);
 		Object bean;
 
-		// Eagerly check singleton cache for manually registered singletons.
+		//在当前容器中查询beanName对应的单例bean Eagerly check singleton cache for manually registered singletons.
 		Object sharedInstance = getSingleton(beanName);
 		if (sharedInstance != null && args == null) {
 			if (logger.isDebugEnabled()) {
@@ -208,7 +208,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 				throw new BeanCurrentlyInCreationException(beanName);
 			}
 
-			// Check if bean definition exists in this factory.
+			//当前容器中存在的话，就在父级容器中查询是否存在当前beanName Check if bean definition exists in this factory.
 			BeanFactory parentBeanFactory = getParentBeanFactory();
 			if (parentBeanFactory != null && !containsBeanDefinition(beanName)) {
 				// Not found -> check parent.
@@ -231,7 +231,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			checkMergedBeanDefinition(mbd, beanName, args);
 
 			// Guarantee initialization of beans that the current bean depends on.
-			//递归获取bean的依赖bean
+			//递归依赖注入依赖的bean,递归获取bean的依赖bean
 			String[] dependsOn = mbd.getDependsOn();
 			if (dependsOn != null) {
 				for (String dependsOnBean : dependsOn) {

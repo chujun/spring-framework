@@ -16,28 +16,16 @@
 
 package org.springframework.beans.factory.support;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.springframework.beans.factory.BeanCreationException;
-import org.springframework.beans.factory.BeanCreationNotAllowedException;
-import org.springframework.beans.factory.BeanCurrentlyInCreationException;
-import org.springframework.beans.factory.DisposableBean;
-import org.springframework.beans.factory.ObjectFactory;
+import org.springframework.beans.factory.*;
 import org.springframework.beans.factory.config.SingletonBeanRegistry;
 import org.springframework.core.SimpleAliasRegistry;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
+
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Generic registry for shared bean instances, implementing the
@@ -82,7 +70,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	/** Logger available to subclasses */
 	protected final Log logger = LogFactory.getLog(getClass());
 
-	/** Cache of singleton objects: bean name --> bean instance */
+	/** 单例bean map，key为beanName，Cache of singleton objects: bean name --> bean instance */
 	private final Map<String, Object> singletonObjects = new ConcurrentHashMap<String, Object>();
 
 	/** Cache of singleton factories: bean name --> ObjectFactory */
@@ -219,6 +207,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 					this.suppressedExceptions = new LinkedHashSet<Exception>();
 				}
 				try {
+					//调用单例工厂方法ObjectFactory的getObject方法创建单例bean
 					singletonObject = singletonFactory.getObject();
 				}
 				catch (BeanCreationException ex) {
