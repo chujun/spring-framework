@@ -25,6 +25,7 @@ public class FileSystemXmlApplicationContextPropertyTest {
         String configLocation = "org.springframework.transaction/src/test/java/org/springframework/transaction/interceptor/transactionalBeanFactory.xml";
         FileSystemXmlApplicationContext ctx = new FileSystemXmlApplicationContext(configLocation);
         assertTrue(ctx.containsBean("targetDependency"));
+        System.out.println("容器bean数量："+ctx.getBeanDefinitionCount());
         ctx.close();
     }
 }

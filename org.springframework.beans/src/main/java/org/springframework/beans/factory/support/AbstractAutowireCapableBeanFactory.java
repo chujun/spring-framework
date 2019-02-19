@@ -958,7 +958,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 	 */
 	protected void populateBean(String beanName, AbstractBeanDefinition mbd, BeanWrapper bw) {
 		PropertyValues pvs = mbd.getPropertyValues();
-
+		//TODO:cj to be debuged
 		if (bw == null) {
 			if (!pvs.isEmpty()) {
 				throw new BeanCreationException(
