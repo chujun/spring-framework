@@ -226,7 +226,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			if (!typeCheckOnly) {
 				markBeanAsCreated(beanName);
 			}
-
+			//根据bean名字去获取BeanDefinition
 			final RootBeanDefinition mbd = getMergedLocalBeanDefinition(beanName);
 			checkMergedBeanDefinition(mbd, beanName, args);
 
@@ -258,7 +258,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 				});
 				bean = getObjectForBeanInstance(sharedInstance, name, beanName, mbd);
 			}
-
+			//创建原型bean
 			else if (mbd.isPrototype()) {
 				// It's a prototype -> create a new instance.
 				Object prototypeInstance = null;
@@ -301,7 +301,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			}
 		}
 
-		// Check if required type matches the type of the actual bean instance.
+		//这儿的bean已经是包含了依赖关系的Bean Check if required type matches the type of the actual bean instance.
 		if (requiredType != null && bean != null && !requiredType.isAssignableFrom(bean.getClass())) {
 			throw new BeanNotOfRequiredTypeException(name, requiredType, bean.getClass());
 		}
