@@ -1,0 +1,9 @@
+@startuml
+participant DefaultListableBeanFactory as dlbf
+participant AbstractBeanFactory as abf
+participant AbstractAutowireCapableBeanFactory as aacbf
+activate dlbf
+dlbf ->abf : doGetBean()
+abf -> aacbf: createBean()
+deactivate dlbf
+@enduml
